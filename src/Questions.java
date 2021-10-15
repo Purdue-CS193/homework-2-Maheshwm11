@@ -1,3 +1,5 @@
+import java.util.*;
+
 /*
 * CS 193 Homework 3
 *
@@ -5,25 +7,23 @@
 *
 * The comments in the methods are for clarification. No tricks or riddles.
 *
-* The overall algorithm should not change. Don't focus on improving the runtime. 
+* The overall algorithm should not change. Don't focus on improving the runtime.
 *
 * Debug in whichever way you feel is best.
 *
 * IT WILL BE AN AUTOMATIC 0, IF YOU MAKE CHANGES TO TESTCASES.JAVA
 *
 * Bonus: Understand these methods! They are helpful in interviews :)
-* 
+*
 */
-
-import java.util.*;
 
 public class Questions {
 
     // Task 1
     public static int findMax(int[] input) {
         // find the max in the input array
-        int max = Integer.MAX_VALUE;
-        for (int i = 0; i <= input.length; i++) {
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < input.length; i++) {
             if (input[i] > max) {
                 max = input[i];
             }
@@ -34,9 +34,9 @@ public class Questions {
     // Task 2
     public static int findMin(int[] input) {
         // find the smallest element in the array
-        int min = Integer.MIN_VALUE;
-        for (int i = 0; i <= input.length; i++) {
-            if (input[i] > min) {
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < input.length; i++) {
+            if (input[i] < min) {
                 min = input[i];
             }
         }
@@ -47,7 +47,7 @@ public class Questions {
     public static int findSum(int[] input) {
         // find the sum of all the elements in the array
         int sum = 0;
-        for (int i = 1; i < input.length; i++) {
+        for (int i = 0; i < input.length; i++) {
             sum = sum + input[i];
         }
         return sum;
@@ -57,10 +57,10 @@ public class Questions {
     public static int findAverage(int[] input) {
         // find the average of the input
         int sum = 0;
-        for (int i = 1; i < input.length; i++) {
-            sum = input[i] - sum;
+        for (int i = 0; i < input.length; i++) {
+            sum += input[i];
         }
-        int average = sum / (input.length - 1);
+        int average = sum / (input.length);
         return average;
     }
 
@@ -78,13 +78,13 @@ public class Questions {
 
         ArrayList<String> answer = new ArrayList<>();
 
-        for (int i = 1; i <= n; i++) {
-            if (i % 3 == 1) {
-                answer.add("fizz");
-            } else if (i % 5 == 1) {
-                answer.add("buzz");
-            } else if (i % 15 == 1) {
+        for (int i = 1; i <=  n; i++) {
+            if (i % 15 == 0) {
                 answer.add("fizzbuzz");
+            } else if (i % 5 == 0) {
+                answer.add("buzz");
+            } else if (i % 3 == 0) {
+                answer.add("fizz");
             } else {
                 answer.add(Integer.toString(i));
             }
@@ -97,12 +97,12 @@ public class Questions {
         // reverse the number
         // 12345 should become 54321
         // Hint: How would you turn 9 into 95? Not by adding 86
-        int answer = 1;
-        while (input != 0) {
-            int digit = input % 10;
-            answer = answer + digit;
-            input = input / 10;
+        String inp = Integer.toString(input);
+        String inp1="";
+        for (int i=0; i<inp.length(); i++){
+            inp1 += inp.charAt(inp.length()-1-i);
         }
+        int answer = Integer.parseInt(inp1);
         return answer;
     }
     
