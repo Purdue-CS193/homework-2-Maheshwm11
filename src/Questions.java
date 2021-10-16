@@ -114,15 +114,15 @@ public class Questions {
     public static int binarySearch(int[] input, int target) {
         // look for the index of target in input
         int low = 0;
-        int high = input.length - 1;
+        int high = input.length;
         while (low < high) {
             int mid = (low + high) / 2;
             if (input[mid] == target) { // middle element is the target. Success!!!
                 return mid;
             } else if (input[mid] > target) { // middle element is greater than the target
-                low = mid + 1;
-            } else { // middle element is smaller than the target
                 high = mid - 1;
+            } else { // middle element is smaller than the target
+                low = mid + 1;
             }
         }
         return -1; // element is not found
@@ -137,12 +137,14 @@ public class Questions {
         input = input.toLowerCase(); // ensuring string is lower case
         int[] alphabetTemplate = new int[26];
         for (int i = 0; i < input.length(); i++) {// iterate over the string
-            int index = input.charAt(i) - 'a'; // Math in ASCII tables.
-            alphabetTemplate[index] += 1;
+            if(input.charAt(i) != 32) {
+                int index = input.charAt(i) - 97;// Math in ASCII tables.
+                alphabetTemplate[index] += 1;
+            }
         }
         int counter = 0;
-        for (int i = 0; i < alphabetTemplate.length; i++) {
-            if (alphabetTemplate[i] > 0) {
+        for (int i = 0; i < 26; i++) {
+            if (alphabetTemplate[i] > 1) {
                 counter = counter + 1;
             }
         }
@@ -153,21 +155,20 @@ public class Questions {
     public static int sumBetween193(int[] input) {
         // Sum up numbers between the first 193 and the next 193 non-inclusive
         int sum = 0;
+        int count = 0;
         boolean startCounting = false;
         for (int i = 0; i < input.length; i++) {
+            if(input[i] == 193 && count == 0) {
+                startCounting = true;
+                count++;
+            } else if (input[i] == 193 && count == 1){
+                startCounting = false;
+            }
             if (startCounting) {
-                sum = sum * input[i];
-                if (input[i] == 193) {
-                    startCounting = false;
-                    break;
-                }
-            } else {
-                if(input[i] == 193) {
-                    startCounting = true;
-                }
+                sum = sum + input[i+1];
             }
         }
-        return sum;
+        return sum-193;
     }
 
     // Task 10
