@@ -176,21 +176,12 @@ public class Questions {
         // checks to see if variable sub appears in theBigOne
         // highly recommended to write this one out on a notebook
         int counter = 0;
-        for (int i = 1; i < theBigOne.length(); i++) {
+        for (int i = 0; i < theBigOne.length(); i++) {
             if (theBigOne.charAt(i) == sub.charAt(0)) {
-                for (int j = 1; j < theBigOne.length(); j++) {
-                    if (theBigOne.charAt(j) == sub.charAt(j - i)) {
-                        counter += 1;
-                    } else { // a character didn't match so break
-                        break;
-                    }
-                    if (counter == sub.length()) {
-                        return true;
-                    }
-                }
+                return true;
             }
         }
-        return true;
+        return false;
     }
     // Main method is used for testing purposes
     public static void main(String[] args) {
